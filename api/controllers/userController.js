@@ -33,6 +33,12 @@ const getUser = async (req, res) => {
 
     res.json(user); // Devuelve el usuario encontrado
 }
+// Función para buscar usuario por nombre en MongoDB
+const findUserByName = async (db, username) => {
+  return await db.collection('users').findOne({ name: username });
+};
+
+
 const dropUser = async (req, res) => {
   const db = req.app.locals.db; // Accede a la conexión de MongoDB
     console.log(req.params); // Imprime los parámetros de la solicitud para depuración
@@ -48,4 +54,4 @@ const dropUser = async (req, res) => {
 }
 
 
-module.exports = { createUser, getUser, dropUser };
+module.exports = { createUser, getUser, dropUser, findUserByName };

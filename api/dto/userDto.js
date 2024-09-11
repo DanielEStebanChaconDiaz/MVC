@@ -1,15 +1,25 @@
+const bcrypt = require('bcrypt');
+
 class UserDTO {
   constructor({ nombre, email, contrasena }) {
     this.name = nombre;
     this.email = email;
-    this.password = contrasena;
+    this.password = this.hashPassword(contrasena);
   }
-  templateCreateUser(data){
+
+  // Método para hashear la contraseña
+  hashPassword(password) {
+    const saltRounds = 10; // Número de rondas de sal para el hash
+    const salt = bcrypt.genSaltSync(saltRounds);
+    return bcrypt.hashSync(password, salt);
+  }
+
+  templateCreateUser(data) {
     console.log(data);
-    return{
+    return {
       status: 201,
-      message: data
-    }
+      message: data,
+    };
   }
 }
 

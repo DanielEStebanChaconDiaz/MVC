@@ -21,10 +21,7 @@ app.use((req, res) => {
 // Configuración de la conexión a MongoDB
 async function connectToMongoDB() {
   try {
-    const client = new mongodb.MongoClient(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
+    const client = new mongodb.MongoClient(process.env.MONGODB_URI);
     
     await client.connect();
     console.log('Conectado a MongoDB');
